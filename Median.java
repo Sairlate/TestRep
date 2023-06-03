@@ -1,17 +1,43 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Median {
+    static void bubbleSort(int[] arr) {
+        int n = arr.length;
+        int temp = 0;
+        for(int i=0; i < n; i++){
+            for(int j=1; j < (n-i); j++){
+                if(arr[j-1] > arr[j]){
+                    temp = arr[j-1];
+                    arr[j-1] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+    }
     public static void main(String[] args) {
         Random random = new Random();
-        int nums = 0;
-        int[] arr = new int[10];
-        System.out.println("Массив чисел:");
+        Scanner sc = new Scanner(System.in);
+        int[] arr = new int[random.nextInt(21)];
+        System.out.println("Массив чисел до сортировки:");
         for(int i = 0; i < arr.length; i++){
-            arr[i] = random.nextInt(50);
+            arr[i] = random.nextInt(50); // присваиваем элементу массива рандомное число от 0 до 49
             System.out.print(arr[i] + " ");
-            nums += arr[i];
         }
         System.out.println();
-        System.out.println("Медиана: " + nums/arr.length);
+        bubbleSort(arr);
+        System.out.println("Массив чисвел после сортировки");
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        double num;
+        if(arr.length % 2 == 0){
+            num = (arr[(arr.length/2)-1] + arr[arr.length/2])/2.0;
+            // можно и так, но вот еще вариант num = (double) (arr[(count/2)-1] + arr[count/2])/2;
+        }else{
+            num = arr[(arr.length-1)/2];
+        }
+        System.out.println("Медиана: " + num);
     }
 }
